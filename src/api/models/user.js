@@ -38,8 +38,13 @@ const userSchema = new Schema({
         }
     },
     subsidiary: {
-        type: Schema.Types.ObjectId,
-        ref: 'Subsidiary',
+        subsidiary_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Subsidiary',
+        },
+        name: {
+            type: String,
+        },
     }
 });
 

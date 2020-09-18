@@ -3,16 +3,18 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const userController = require('../controllers/users');
+const {listUsers, createUser, login} = require('../controllers/users');
 
 // validators
-const userValidators = require('../validators/users');
+const {baseValidators, loginValidator} = require('../validators/users');
 
 // middlewares
-const isAuthenticated = require('../utils/middlewares').isAuthenticated;
+const {isAuthenticated, isAdmin, isOwnerOrAdmin} = require('../utils/permissions');
+const basePermissions = [isAuthenticated, isAdmin];
+const updatePermissions = [isAuthenticated, isOwnerOrAdmin];
 
-// routes
-router.get('/', isAuthenticated, userController.list);
-router.post('/', userValidators.createValidator(), userController.create);
-router.post('/login', userValidators.loginValidator(), userController.login);
+// /api/user/*
+router.get('/', basePermissions, listUsers);
+router.post('/', basePermissions, baseValidators(), createUser);
+router.post('/login', loginValidator(), login);
 module.exports = router;

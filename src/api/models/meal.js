@@ -13,10 +13,6 @@ const mealSchema = new Schema({
     description: {
         type: String,
         required: true
-    },
-    asign:{
-        type: Boolean,
-        default: false
     }
 });
 

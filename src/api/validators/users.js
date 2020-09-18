@@ -3,7 +3,7 @@ const User = require('../models/user');
 const Subsidiary = require('../models/subsidiary');
 const Role = require('../models/role');
 
-exports.createValidator = () => {
+exports.baseValidators = () => {
     const email = body('email')
         .exists()
         .withMessage('[email] is a required field')

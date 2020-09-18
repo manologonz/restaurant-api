@@ -8,6 +8,12 @@ exports.handleError = (err) => {
     return err;
 }
 
+exports.handleNotFound = (model) => {
+    const error = new Error(`A ${model} with that id could not be found.`);
+    error.statusCode = 404;
+    return error;
+}
+
 exports.checkValidationErros = (errors) => {
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed');
